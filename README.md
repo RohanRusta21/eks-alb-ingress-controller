@@ -30,6 +30,13 @@ eksctl utils associate-iam-oidc-provider --cluster alb-demo-cluster  --approve -
 }
 ```
 
+
+### aws official documentation to insall alb controller
+
+```
+https://docs.aws.amazon.com/eks/latest/userguide/lbc-helm.html
+```
+
 ### install alb using helm
 
 ```
