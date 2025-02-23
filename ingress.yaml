@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: alb-ingress-demo
+  namespace: default
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/subnets: subnet-0f34ce1bc35387b75, subnet-0300fa7efc692d081
+    alb.ingress.kubernetes.io/target-type: ip   # Add this line
+    alb.ingress.kubernetes.io/backend-protocol: HTTP  # Add this line
+spec:
+  ingressClassName: alb
+  rules:
+    - http:
+        paths:
+          - path: /foo
+            pathType: Prefix
+            backend:
+              service:
+                name: server-foo
+                port:
+                  number: 8080
+          - path: /bar
+            pathType: Prefix
+            backend:
+              service:
+                name: server-bar
+                port:
+                  number: 8080
