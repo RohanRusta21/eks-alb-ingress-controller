@@ -2,6 +2,9 @@
 
 ### Associates an OIDC provider with your EKS cluster
 
+ - Associates an OIDC provider with your EKS cluster
+ - Allows IAM roles to be used inside the Kubernetes cluster.
+
 ```
 eksctl utils associate-iam-oidc-provider --cluster alb-demo-cluster  --approve --region us-east-2
 ```
@@ -18,6 +21,10 @@ curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-cont
 ```
 
 ### Create an IAM policy using the policy downloaded in the previous step.
+
+ - Creates a new IAM policy named AWSLoadBalancerControllerIAMPolicy.
+ - This policy allows the Load Balancer Controller to make AWS API calls.
+
 ```
 aws iam create-policy \
     --policy-name AWSLoadBalancerControllerIAMPolicy \
@@ -25,6 +32,12 @@ aws iam create-policy \
 ```
 
 ### Set up an IAM service account in an EKS cluster, allowing the AWS Load Balancer Controller to manage AWS Load Balancers on behalf of the Kubernetes cluster.
+
+ - Creates a Kubernetes ServiceAccount named aws-load-balancer-controller.
+ - Associates it with an IAM Role (AmazonEKSLoadBalancerControllerRole).
+ - Attaches the AWSLoadBalancerControllerIAMPolicy.
+ - Allows Kubernetes to use AWS IAM for authentication.
+ 
 
 ```
 eksctl create iamserviceaccount \
@@ -53,6 +66,9 @@ helm repo update eks
 
 ### Install the AWS Load Balancer Controller.
 
+ - Installs the AWS Load Balancer Controller in the kube-system namespace.
+ - Links it to the existing aws-load-balancer-controller service account.
+
 ```
 helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
   -n kube-system \
@@ -69,8 +85,6 @@ kubectl apply -f crds.yaml
 ```
 
 # Step 3: Verify that the controller is installed
-
-### Verify that the controller is installed.
 
 ```
 kubectl get deployment -n kube-system aws-load-balancer-controller
