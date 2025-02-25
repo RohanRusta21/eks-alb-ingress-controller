@@ -7,27 +7,12 @@ eksctl utils associate-iam-oidc-provider --cluster alb-demo-cluster  --approve -
 ```
 
 
-### Trust relationship policy
+### Step 1: Create IAM Role using eksctl
+
+# Download an IAM policy for the AWS Load Balancer Controller that allows it to make calls to AWS APIs
 
 ```
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Principal": {
-        "Federated": "arn:aws:iam::251620460948:oidc-provider/oidc.eks.us-east-2.amazonaws.com/id/8867CF29797145BF9899A85AD49F75CF"
-      },                                                     
-      "Action": "sts:AssumeRoleWithWebIdentity",
-      "Condition": {
-        "StringEquals": {
-          "oidc.eks.us-east-2.amazonaws.com/id/8867CF29797145BF9899A85AD49F75CF:aud": "sts.amazonaws.com",
-          "oidc.eks.us-east-2.amazonaws.com/id/8867CF29797145BF9899A85AD49F75CF:sub": "system:serviceaccount:kube-system:aws-load-balancer-controller"
-        }
-      }
-    }
-  ]
-}
+curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.11.0/docs/install/iam_policy.json
 ```
 
 
