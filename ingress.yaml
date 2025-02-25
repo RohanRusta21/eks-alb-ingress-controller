@@ -5,9 +5,9 @@ metadata:
   namespace: default
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/subnets: subnet-0f34ce1bc35387b75, subnet-0300fa7efc692d081
-    alb.ingress.kubernetes.io/target-type: ip   # Add this line
-    alb.ingress.kubernetes.io/backend-protocol: HTTP  # Add this line
+    alb.ingress.kubernetes.io/subnets: subnet-0f34ce1bc35387b75, subnet-0300fa7efc692d081 # Modify this as it will be different
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/backend-protocol: HTTP
 spec:
   ingressClassName: alb
   rules:
