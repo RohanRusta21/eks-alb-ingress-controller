@@ -1,6 +1,6 @@
 # eks-alb-ingress-controller
 
-### Create/Activate OIDC provider for cluster
+### Associates an OIDC provider with your EKS cluster
 
 ```
 eksctl utils associate-iam-oidc-provider --cluster alb-demo-cluster  --approve --region us-east-2
