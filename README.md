@@ -1,4 +1,4 @@
-# eks-alb-ingress-controller
+# AWS Load Balancer Controller (formerly known as eks-alb-ingress-controller)
 
 ### Associates an OIDC provider with your EKS cluster
 
